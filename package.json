@@ -24,7 +24,7 @@
   "jest": {
     "verbose": true,
     "transform": {
-      "*.test.js$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     }
   },
   "dependencies": {
