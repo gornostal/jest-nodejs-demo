@@ -4,7 +4,7 @@
   "description": "\"Demo Jest\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,15 +24,7 @@
   "jest": {
     "verbose": true,
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    },
-    "setupFiles": [
-      "./src/shim.js",
-      "./src/setupTests.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "blueprints",
-      "e2e"
-    ]
+      "*.test.js$": "<rootDir>/node_modules/babel-jest"
+    }
   }
 }
