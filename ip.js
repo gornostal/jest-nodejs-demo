@@ -1,8 +1,11 @@
-var request = require("request")
+var request = require("async-request")
 
-const myPublicIp = aysnc () => {
-  const resp = await request('ifconfig.me/all.json')
-  return resp.ip_addr
+async function myPublicIp() {
+    const resp = await request("https://api.ipify.org?format=json", {
+        headers: { Accept: "application/json" }
+    })
+    const jsonBody = JSON.parse(resp.body)
+    return jsonBody.ip
 }
 
-module.export = { myPublicIp }
+exports.myPublicIp = myPublicIp
