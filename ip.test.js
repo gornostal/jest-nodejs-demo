@@ -1,15 +1,19 @@
-const { myPublicIp } = require("./ip");
+const { myPublicIp } = require("./ip")
 
-const testMock = jest.fn();
-
-testMock.mockReturnValue({body: '{"ip":"84.47.179.70"}' });
+jest.mock("async-request")
+const request = require("async-request")
+request.mockReturnValue({ body: '{"ip":"1.2.3.4"}' })
 
 describe("myPublicIp()", () => {
-
-  it("returns ip_addr property from HTTP response", async () => {
-    const ip = await myPublicIp();
-
-    expect(ip).toEqual("84.47.179.70", "Incorrect IP address returned")
+  it("returns 'ip' property from an HTTP response", async () => {
+    const ip = await myPublicIp()
+    expect(ip).toEqual("1.2.3.4", "Incorrect IP address returned")
   })
 
+  it("calls request() with correct Accept headers", async () => {
+    const ip = await myPublicIp()
+    expect(request).toBeCalledWith("https://api.ipify.org?format=json", {
+      headers: { Accept: "application/json" }
+    })
+  })
 })
