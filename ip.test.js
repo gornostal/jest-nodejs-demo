@@ -1,4 +1,4 @@
-const { myPublicIp } = require("./ip")
+const { myPublicIp, IpException } = require("./ip")
 
 jest.mock("async-request")
 const request = require("async-request")
@@ -15,5 +15,12 @@ describe("myPublicIp()", () => {
     expect(request).toBeCalledWith("https://api.ipify.org?format=json", {
       headers: { Accept: "application/json" }
     })
+  })
+
+  it("throws IpException if HTTP request fails", () => {
+    request.mockImplementation(async () => {
+      throw new Error("something went wrong")
+    })
+    return expect(myPublicIp()).rejects.toThrowError(IpException)
   })
 })
