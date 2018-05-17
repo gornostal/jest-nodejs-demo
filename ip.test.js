@@ -1,10 +1,8 @@
 const { myPublicIp } = require("./ip");
 
+const testMock = jest.fn();
 
-jest.mock('async-request', () => {
-  return () => ({body: '{"ip":"84.47.179.70"}' });
-});
-
+testMock.mockReturnValue({body: '{"ip":"84.47.179.70"}' });
 
 describe("myPublicIp()", () => {
 
