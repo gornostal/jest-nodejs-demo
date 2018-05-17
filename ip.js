@@ -1,8 +1,11 @@
-var request = require("request")
+var request = require("async-request")
 
-const myPublicIp = aysnc () => {
-  const resp = await request('ifconfig.me/all.json')
-  return resp.ip_addr
+async function myPublicIp() {
+    const resp = await request("http://ifconfig.me/all.json", {
+        headers: { Accept: "application/json" }
+    })
+    console.log(resp)
+    return resp.ip_addr
 }
 
-module.export = { myPublicIp }
+exports.myPublicIp = myPublicIp
