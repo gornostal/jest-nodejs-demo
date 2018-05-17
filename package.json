@@ -26,5 +26,8 @@
     "transform": {
       "*.test.js$": "<rootDir>/node_modules/babel-jest"
     }
+  },
+  "dependencies": {
+    "async-request": "^1.2.0"
   }
 }
